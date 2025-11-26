@@ -114,6 +114,28 @@
 
     .profile-card i{ font-size:2rem; color:var(--secondary); margin-bottom:8px; display:block; }
     .profile-card .name{ color:var(--text); font-weight:700; margin-bottom:8px; }
+    /* ===========================
+   PROFILE IMAGE DYNAMIC EFFECTS
+=========================== */
+
+.photo .profile-img {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: 0.4s ease;
+  border: 3px solid rgba(100,255,218,0.4);
+  box-shadow: 0 0 12px rgba(100,255,218,0.35);
+}
+
+.photo:hover .profile-img {
+  transform: scale(1.08) translateY(-6px);
+  box-shadow: 
+    0 0 18px rgba(100,255,218,0.6),
+    0 0 30px rgba(100,255,218,0.35);
+  border-color: rgba(100,255,218,0.8);
+}
+
 
     /* About */
     .about{ padding:70px 0; background:var(--primary); }
@@ -122,6 +144,32 @@
     .about .text p{ color:var(--text-light); margin-bottom:12px; }
     .about .photo{ flex:1; text-align:center; }
     .profile-img{ width:260px; height:260px; border-radius:50%; object-fit:cover; border:3px solid var(--secondary); box-shadow:0 10px 30px rgba(0,0,0,0.5); display:inline-block; background:#0d2133; }
+/* ===========================
+   About Text Fade-In
+=========================== */
+.about-text {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.about-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Buttons fade in with delay */
+.btn-container a {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+  transition-delay: 0.3s; /* delay buttons after text */
+}
+
+.about-text.visible .btn-container a {
+  opacity: 1;
+  transform: translateY(0);
+}
 
     /* Skills */
     .skills{ background:var(--light); padding:70px 0; }
@@ -319,7 +367,7 @@
   <header>
     <div class="container">
       <nav>
-        <div class="logo">NavaneethaKrishnan Balasubramani</div>
+        <div class="logo">NavaneethaKrishnan B</div>
         <div class="menu-toggle" id="menuToggle">☰</div>
         <ul class="nav-links" id="navLinks">
           <li><a href="#home">Home</a></li>
@@ -378,14 +426,14 @@
     <div class="container">
       <h2 class="center">About Me</h2>
       <div class="content">
-        <div class="text">
+        <div class="text about-text">
           <!-- About written by assistant as requested earlier -->
           <p>I’m an Electrical and Electronics Engineering student
 interested in IoT, embedded systems, and problem-solving.
 I love working with DSA and programming languages like C, C++, and Java.
 I’m curious about how technology shapes smarter systems.
 Every project I build helps me grow as an engineer</p>
-          <div style="margin-top:16px;">
+        <div class="btn-container"  style="margin-top:16px;">
             <a href="#projects" class="btn">See Projects</a>
             <a href="#contact" class="btn">Contact</a>
           </div>
@@ -393,7 +441,7 @@ Every project I build helps me grow as an engineer</p>
 
         <div class="photo">
           <!-- Replace 'profile.jpg' with your actual image filename. Keep the image square so it crops to circle nicely. -->
-          <img src="" alt="Navaneethakrishnan" class="profile-img">
+          <img src="https://raw.githubusercontent.com/NavaneethaKrishnan-B/portfolio/refs/heads/main/images/navin.jpg" class="profile-img" alt="Navaneethakrishnan">
           <div style="margin-top:12px;" class="muted">.</div>
         </div>
       </div>
@@ -752,6 +800,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.3 });
 
   items.forEach(item => observer.observe(item));
+});
+
+  // About section fade-in
+document.addEventListener("DOMContentLoaded", () => {
+  const aboutSection = document.querySelector('.about-text');
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target); // stop observing after it appears
+      }
+    });
+  }, { threshold: 0.3 });
+
+  if (aboutSection) observer.observe(aboutSection);
 });
 
     // ====== Basic interactive scripts (clean, fixed) ======
