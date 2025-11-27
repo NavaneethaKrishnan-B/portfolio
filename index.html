@@ -6,24 +6,19 @@
   <title>Navaneeth — Portfolio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* =========================
-       Theme based on uploaded template
-       Personalized for: NAVANEETHAKRISHNAN B
-       Replace images / links below as needed
-       ========================= */
-
     * { margin:0; padding:0; box-sizing: border-box; }
-    :root{
-      --primary: #0a192f;
-      --secondary: #64ffda;
-      --accent: #e53e3e;
-      --light: #112240;
-      --dark: #020c1b;
-      --text: #ccd6f6;
-      --text-light: #8892b0;
-      --digital-blue: #00f3ff;
-      --digital-purple: #9d4edd;
-    }
+   :root{
+  --primary: #0b0b0d;
+  --secondary: #64ffda;
+  --accent: #ff4d4d;
+  --light: #141418;
+  --dark: #050507;
+  --text: #e5e5e5;
+  --text-light: #9b9b9b;
+  --digital-blue: #00f3ff;
+  --digital-purple: #b56cff;
+}
+
 
     body{
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -37,7 +32,7 @@
 
     header{
       position:fixed; top:0; left:0; right:0;
-      background: rgba(10,25,47,0.9);
+      background: rgb(0, 3, 8);
       backdrop-filter: blur(8px);
       z-index:1000;
       box-shadow: 0 2px 10px rgba(0,0,0,0.25);
@@ -325,6 +320,41 @@
     .hobby-badge{ width:150px; display:flex; flex-direction:column; align-items:center; gap:12px; }
     .hobby-circle{ width:88px; height:88px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:radial-gradient(circle at 30% 30%, rgba(100,255,218,0.06), rgba(157,78,221,0.02)); border:2px solid rgba(100,255,218,0.06); color:var(--secondary); font-size:1.8rem; }
 
+    /* ===========================
+   HOBBY ANIMATIONS
+=========================== */
+
+.hobby-animate {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.hobby-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover animation */
+.hobby-badge {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.hobby-badge:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 10px 22px rgba(100,255,218,0.25);
+}
+
+.hobby-circle {
+  transition: transform 0.35s ease, background 0.35s ease;
+}
+
+.hobby-badge:hover .hobby-circle {
+  transform: scale(1.15);
+  background: rgba(100,255,218,0.12);
+  border-color: rgba(100,255,218,0.35);
+}
+
     /* Quote */
     .quote{ padding:36px 0; text-align:center; color:var(--text-light); font-style:italic; }
 
@@ -355,6 +385,34 @@
     /* tiny helpers */
     .center{ text-align:center; }
     .muted{ color:var(--text-light); font-size:0.95rem; }
+
+  /* ===== DARK MODE BOX MATCHING ===== */
+
+.profile-card,
+.skill-card,
+.project-card,
+.cert-card,
+.contact-box,
+.timeline-item .card {
+  background: rgba(20, 20, 24, 0.75);   /* deep dark box */
+  border: 1px solid rgba(100, 255, 218, 0.10); /* soft neon border */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55);  /* dark shadow */
+}
+
+/* Hover effect (stronger neon glow) */
+.profile-card:hover,
+.skill-card:hover,
+.project-card:hover,
+.cert-card:hover,
+.timeline-item .card:hover {
+  background: rgba(27, 27, 30, 0.92);
+  border-color: rgba(100, 255, 218, 0.35);
+  box-shadow:
+    0 0 18px rgba(100, 255, 218, 0.30),
+    0 0 30px rgba(100, 255, 218, 0.18);
+}
+
+
   </style>
 </head>
 <body>
@@ -367,7 +425,7 @@
   <header>
     <div class="container">
       <nav>
-        <div class="logo">NavaneethaKrishnan B</div>
+        <div class="logo">Hello Everyone :)</div>
         <div class="menu-toggle" id="menuToggle">☰</div>
         <ul class="nav-links" id="navLinks">
           <li><a href="#home">Home</a></li>
@@ -441,7 +499,7 @@ Every project I build helps me grow as an engineer</p>
 
         <div class="photo">
           <!-- Replace 'profile.jpg' with your actual image filename. Keep the image square so it crops to circle nicely. -->
-          <img src="images/navin.jpg" class="profile-img" alt="Navaneethakrishnan">
+          <img src="https://raw.githubusercontent.com/NavaneethaKrishnan-B/portfolio/refs/heads/main/images/navin.jpg" class="profile-img" alt="Navaneethakrishnan">
           <div style="margin-top:12px;" class="muted">.</div>
         </div>
       </div>
@@ -692,25 +750,30 @@ Every project I build helps me grow as an engineer</p>
 
 
   <!-- HOBBIES -->
-  <section id="hobbies" class="hobbies">
-    <div class="container">
-      <h2>Hobbies</h2>
-      <div class="hobby-grid">
-        <div class="hobby-badge">
-          <div class="hobby-circle"><i class="fas fa-film"></i></div>
-          <div class="hobby-label">Film Exploration</div>
-        </div>
-        <div class="hobby-badge">
-          <div class="hobby-circle"><i class="fas fa-music"></i></div>
-          <div class="hobby-label">Listening to Music</div>
-        </div>
-        <div class="hobby-badge">
-          <div class="hobby-circle"><i class="fas fa-lightbulb"></i></div>
-          <div class="hobby-label">Reading Tech News</div>
-        </div>
+<section id="hobbies" class="hobbies">
+  <div class="container">
+    <h2 class="center">Hobbies</h2>
+
+    <div class="hobby-grid">
+
+      <div class="hobby-badge hobby-animate">
+        <div class="hobby-circle"><i class="fas fa-film"></i></div>
+        <div class="hobby-label">Film Exploration</div>
       </div>
+
+      <div class="hobby-badge hobby-animate">
+        <div class="hobby-circle"><i class="fas fa-music"></i></div>
+        <div class="hobby-label">Listening to Music</div>
+      </div>
+
+      <div class="hobby-badge hobby-animate">
+        <div class="hobby-circle"><i class="fas fa-lightbulb"></i></div>
+        <div class="hobby-label">Reading Tech News</div>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- QUOTE -->
   <section class="quote">
@@ -802,20 +865,38 @@ document.addEventListener('DOMContentLoaded', () => {
   items.forEach(item => observer.observe(item));
 });
 
-  // About section fade-in
+// Hobbies fade-in animation
 document.addEventListener("DOMContentLoaded", () => {
-  const aboutSection = document.querySelector('.about-text');
+  const hobbies = document.querySelectorAll(".hobby-animate");
 
-  const observer = new IntersectionObserver((entries, observer) => {
+  const hobObs = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target); // stop observing after it appears
+        entry.target.classList.add("visible");
       }
     });
   }, { threshold: 0.3 });
 
-  if (aboutSection) observer.observe(aboutSection);
+  hobbies.forEach(hobby => hobObs.observe(hobby));
+});
+
+
+  // About section fade-in
+document.addEventListener('DOMContentLoaded', () => {
+  const aboutSection = document.querySelector('.about-text');
+
+  if (!aboutSection) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target); // trigger only once
+      }
+    });
+  }, { threshold: 0.2 });
+
+  observer.observe(aboutSection);
 });
 
     // ====== Basic interactive scripts (clean, fixed) ======
@@ -918,4 +999,3 @@ document.addEventListener("DOMContentLoaded", () => {
   </script>
 </body>
 </html>
-
